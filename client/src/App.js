@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+
 import './App.css';
+
 
 class App extends Component {
   constructor(props) {
     super(props);
-
-     this.handleSubmit = this.handleSubmit.bind(this);
+    
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+  
 
   componentDidMount() {
     this.callApi()
@@ -43,30 +46,39 @@ class App extends Component {
     });
     const body = await response.text();
     this.setState({ responseToPost: body });
+    alert("votre message a été transféré");
+    
   };
 
   render() {
+    
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Nom:
-          <input type="text" ref="nom"  />
-        </label>
-        <label>
-          Email:
-          <input type="email" ref="email"  />
-        </label>
-        <label>
-          Sujet:
-          <input type="text" ref="subject"  />
-        </label>
-        <label>
-          Message:
-          <textarea  ref="message" />  
-        </label>
-        <input type="submit" value="Contact" />
+     
+      <form className="custom-card form" onSubmit={this.handleSubmit}>
+        <h2 className="h2">N'hésitez pas à nous contacter</h2>
+        <div className="fields ">
+          <input type="text" ref="nom" placeholder="Nom" className="fields"/>
+        </div>
+       
+        <div className="fields">
+          <input type="email" ref="email" placeholder="Email" className="fields" />
+        </div>
+        <div className="fields">
+          <input type="text" ref="subject" placeholder="Sujet" className="fields" />
+        </div>
+
+        <div className="fields">
+          <textarea  ref="message" placeholder="Message" className="fields"/>  
+        </div>
+        
+        <div className="btn" >
+          <input type="submit" value="Contact" className="button" />
+        </div>
       </form>
+
+    
     );
   }
 }
+
 export default App;

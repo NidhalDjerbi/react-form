@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "client": "cd client && yarn start",
+    "client": "cd react-form && yarn start",
     "server": "nodemon ./bin/www",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "cd react-form && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
