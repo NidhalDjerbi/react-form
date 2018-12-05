@@ -8,6 +8,13 @@ import "./index.css";
 import Routes from "./Routes";
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  
 componentDidMount() {
     this.callApi()
       .then(res => this.setState({ response: res.express }))
