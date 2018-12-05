@@ -1,9 +1,8 @@
 const Contact = require('../models/contact');
 
 exports.save = function (req, res) {
-
+    console.log(req.body);
    let contact = new Contact(req.body);
-
    contact.save()
        .then((contact) => {
 

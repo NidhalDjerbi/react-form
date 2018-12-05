@@ -9,9 +9,14 @@ import Routes from "./Routes";
 
 class App extends Component {
 
+  state = {
+    nom: '',
+    email : '',
+    subject :'',
+    message :''
+  }
   constructor(props) {
     super(props);
-    
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   
@@ -22,7 +27,7 @@ componentDidMount() {
   }
 
   callApi = async () => {
-    const response = await fetch('/api/contact');
+    const response = await fetch('api/contact');
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
     return body;
@@ -31,20 +36,16 @@ componentDidMount() {
 
   handleSubmit = async e => {
     e.preventDefault();
-    let nom = ReactDOM.findDOMNode(this.refs.nom).value;
-    let email = ReactDOM.findDOMNode(this.refs.email).value;
-    let subject = ReactDOM.findDOMNode(this.refs.subject).value;
-    let message = ReactDOM.findDOMNode(this.refs.message).value;
-    
-    const response = await fetch('/api/contact', {
+    console.log(this.state);
+    const response = await fetch('api/contact', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name: nom,
-        email: email,
-        subject: subject,
-        message: message
+      body: JSON.stringify({name: this.state.nom,
+        email: this.state.email,
+        subject: this.state.subject,
+        message: this.state.message
       }),
     });
     console.log(body);
@@ -74,6 +75,7 @@ componentDidMount() {
                 error="wrong"
                 success="right"
                 ref="nom"
+                onChange={e => this.setState({ nom: e.target.value })}
               />
               <MDBInput
                 label="Email"
@@ -84,6 +86,8 @@ componentDidMount() {
                 error="wrong"
                 success="right"
                 ref="email"
+
+                onChange={e => this.setState({ email: e.target.value })}
               />
               <MDBInput
                 label="Sujet"
@@ -94,6 +98,7 @@ componentDidMount() {
                 error="wrong"
                 success="right"
                 ref="subject"
+                onChange={e => this.setState({ subject: e.target.value })}
               />
               <MDBInput
                 type="textarea"
@@ -101,6 +106,7 @@ componentDidMount() {
                 label="Message"
                 icon="pencil"
                 ref="message"
+                onChange={e => this.setState({ message: e.target.value })}
               />
             </div>
             <div className="text-center">

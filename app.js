@@ -2,7 +2,7 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-
+const cors = require('cors');
 const indexRouter = require('./routes/index');
 
 var app = express();
@@ -11,6 +11,7 @@ require('dotenv').config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
 mongoose.connect(process.env.MONGODB_STRING, {
   useNewUrlParser: true,
