@@ -1,11 +1,6 @@
 import React,{Component} from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBInput,MDBIcon, MDBBtn, Card, col} from 'mdbreact';
-import ReactDOM from 'react-dom';
-
-import { BrowserRouter as Router } from "react-router-dom";
+import { MDBContainer, MDBInput , MDBIcon , MDBBtn,Button, Modal, ModalBody, ModalHeader, ModalFooter } from 'mdbreact';
 import "./index.css";
-
-import Routes from "./Routes";
 
 class App extends Component {
 
@@ -13,14 +8,18 @@ class App extends Component {
     nom: '',
     email : '',
     subject :'',
-    message :''
+    message :'',
+    modal: false
   }
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  
   
 componentDidMount() {
+  
     this.callApi()
       .then(res => this.setState({ response: res.express }))
       .catch(err => console.log(err));
@@ -32,6 +31,12 @@ componentDidMount() {
     if (response.status !== 200) throw Error(body.message);
     return body;
   };
+
+  toggle = () => {
+    this.setState({
+      modal: !this.state.modal
+    });
+  }
 
 
   handleSubmit = async e => {
@@ -48,12 +53,14 @@ componentDidMount() {
         message: this.state.message
       }),
     });
-    console.log(body);
     const body = await response.text();
     this.setState({ responseToPost: body });
-    alert("votre message a été transféré");
-    
+    this.setState({
+      modal: !this.state.modal
+    });
   };
+   
+  
 
   render() {
     
@@ -70,6 +77,7 @@ componentDidMount() {
                 group
                 type="text"
                 validate
+                required
                 error="wrong"
                 success="right"
                 ref="nom"
@@ -81,6 +89,7 @@ componentDidMount() {
                 group
                 type="email"
                 validate
+                required
                 error="wrong"
                 success="right"
                 ref="email"
@@ -93,6 +102,7 @@ componentDidMount() {
                 group
                 type="text"
                 validate
+                required
                 error="wrong"
                 success="right"
                 ref="subject"
@@ -103,16 +113,28 @@ componentDidMount() {
                 rows="2"
                 label="Message"
                 icon="pencil"
+                required
                 ref="message"
                 onChange={e => this.setState({ message: e.target.value })}
               />
             </div>
             <div className="text-center">
-              <MDBBtn type ="submit" outline color="primary">
+              <MDBBtn type ="submit" outline color="primary" >
                 Contact <MDBIcon icon="paper-plane-o" className="ml-1" />
               </MDBBtn>
             </div>
+            
           </form>
+          <Modal isOpen={this.state.modal} toggle={this.toggle}>
+          <ModalHeader className="bg" toggle={this.toggle}></ModalHeader>
+          <ModalBody>
+            <p>Message reçu!</p> 
+            <p> Nous revenons vers vous dans les plus brefs délais </p>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="secondary" onClick={this.toggle}>Close</Button>{' '}
+          </ModalFooter>
+        </Modal>
     </MDBContainer>
    
 

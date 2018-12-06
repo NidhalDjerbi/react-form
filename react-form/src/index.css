@@ -41,3 +41,11 @@
 	color:rgba(0,0,0,.35);
 	float:right;
 }
+
+.bg {
+	background-image: url("https://www.medgo.fr/images/Logo_FB.png");
+	height: 30vh;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+  }
