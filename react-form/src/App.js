@@ -59,10 +59,8 @@ componentDidMount() {
     
     return (
    
-     <Card>
-     <MDBContainer  >
-      <MDBRow >
-        <MDBCol md="6" >
+
+     <MDBContainer>
           <form onSubmit={this.handleSubmit} >
             <p className="h5 text-center mb-4">N'hésitez pas à nous contacter</p>
             <div className="grey-text">
@@ -110,15 +108,13 @@ componentDidMount() {
               />
             </div>
             <div className="text-center">
-              <MDBBtn type ="submit" outline color="secondary">
+              <MDBBtn type ="submit" outline color="primary">
                 Contact <MDBIcon icon="paper-plane-o" className="ml-1" />
               </MDBBtn>
             </div>
           </form>
-        </MDBCol>
-      </MDBRow>
     </MDBContainer>
-    </Card>
+   
 
     );
   }
